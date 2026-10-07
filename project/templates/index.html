@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Login - GOFICO{% endblock %}
+{% block body %}
+<div class="auth-wrapper">
+<div class="container auth-card" data-show-register="{{ show_register | default(false) }}" data-show-forgot="{{ show_forgot | default(false) }}" data-show-reset="{{ reset_token is defined }}">
+    <div class="auth-brand">
+        <p class="brand-overline">GOFICO ADMIN</p>
+        <h1>Secure Access Portal</h1>
+    </div>
+
+    {% if message %}
+    <div class="status-message status-info">{{ message }}</div>
+    {% endif %}
+
+    {% if reset_url %}
+    <div class="reset-link-box">
+        <strong>Development reset link</strong>
+        <a href="{{ reset_url }}">Open password reset page</a>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="status-message status-error">{{ error }}</div>
+    {% endif %}
+
+    <form id="login-form" action="{{ url_for('login') }}" method="POST">
+        <h2>Welcome Back</h2>
+        <input type="text" name="username" placeholder="Username" required class="input-field-login"/>
+        <input type="password" name="password" placeholder="Password" required class="input-field-login"/>
+
+        <div class="buttons">
+            <button type="submit">Login</button>
+            <button type="button" id="show-register" class="btn-secondary">Create Account</button>
+        </div>
+
+    </form>
+
+
+
+    <form id="register-form" action="{{ url_for('register') }}" method="POST" style="display: none;">
+        <h2>Create Account</h2>
+
+        <div class="name-row">
+            <input type="text" name="first_name" placeholder="First Name" required class="input-field-register-f"/>
+            <input type="text" name="last_name" placeholder="Last Name" required class="input-field-register-f"/>
+        </div>
+
+        <input type="text" name="username" placeholder="Username" required class="input-field-register"/>
+        <input type="email" name="email" placeholder="Email" required class="input-field-register"/>
+        <input type="password" name="password" placeholder="Password" required class="input-field-register"/>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required class="input-field-register"/>
+
+        <div class="buttons">
+            <button type="button" id="show-login" class="btn-secondary">Back To Login</button>
+            <button type="submit">Register</button>
+        </div>
+
+       
+    </form>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function()
+{
+    const  loginForm= document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const container = document.querySelector(".container");
+
+    function hideForms() {
+        loginForm.style.display = "none";
+        registerForm.style.display = "none";
+    
+    } 
+     if (container.dataset.showRegister === "True") {
+        hideForms();
+        registerForm.style.display = "block";
+    }
+
+    document.getElementById("show-register").addEventListener("click", function()
+    {
+        hideForms();
+        registerForm.style.display = "block";
+    });
+
+    document.getElementById("show-login").addEventListener("click", function()
+    {
+        hideForms();
+        loginForm.style.display = "block";
+    });
+
+
+    
+}
+);
+
+
+</script>
+{% endblock %}

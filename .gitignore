@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+instance/
+*.db
+.DS_Store
+.env
+
+# Local Python virtual environments
+venv/
+flask-auth/
