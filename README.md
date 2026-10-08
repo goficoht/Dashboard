@@ -14,7 +14,7 @@ A Flask-based admin dashboard for managing website content.
 - SQLite database
 - Session-based login
 
-  ## Technologies
+## Technologies
 
 - Python
 - Flask
