@@ -10,7 +10,6 @@ A Flask-based admin dashboard for managing website content.
 - Secure password authentication
 - Create, edit, and delete content
 - Publish content
-- Upload images
 - SQLite database
 - Session-based login
 
